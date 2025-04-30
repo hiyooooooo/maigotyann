@@ -200,9 +200,6 @@
             songsRef.child(editKey).update({ title, artist: artist || '?', key });
             editKey = null;
           } else {
-            const newSong = songsRef.push();
-            newSong.set({ title, artist: artist || '?', key });
-          }
             const isDuplicate = songs.some(song => song.title === title && song.artist === artist);
             if (isDuplicate) {
               alert('すでに登録されている曲です');
@@ -211,6 +208,11 @@
               return;
             }
 
+            const newSong = songsRef.push();
+            newSong.set({ title, artist: artist || '?', key });
+          }
+
+          
           clearInputs();
           addButton.disabled = false;
           addButton.textContent = '登録する';
