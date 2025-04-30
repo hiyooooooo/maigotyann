@@ -203,10 +203,20 @@
             const newSong = songsRef.push();
             newSong.set({ title, artist: artist || '?', key });
           }
+            const isDuplicate = songs.some(song => song.title === title && song.artist === artist);
+            if (isDuplicate) {
+              alert('すでに登録されている曲です');
+              addButton.disabled = false;
+              addButton.textContent = '登録する';
+              return;
+            }
+
           clearInputs();
           addButton.disabled = false;
           addButton.textContent = '登録する';
+        
           message.style.visibility = 'visible';
+          
           setTimeout(() => {
             message.style.visibility = 'hidden';
           }, 1500);
